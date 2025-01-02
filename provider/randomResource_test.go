@@ -10,9 +10,9 @@ import (
 )
 
 func TestRandomResource(t *testing.T) {
-	server := integration.NewServer("xyz", semver.Version{Minor: 1}, Provider())
+	server := integration.NewServer("azure-app-config", semver.Version{Minor: 1}, Provider())
 	integration.LifeCycleTest{
-		Resource: "xyz:index:Random",
+		Resource: "azure-app-config:index:Random",
 		Create: integration.Operation{
 			Inputs: presource.NewPropertyMapFromMap(map[string]interface{}{
 				"length": 24,

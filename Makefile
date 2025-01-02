@@ -1,10 +1,10 @@
-PROJECT_NAME := Pulumi Xyz Resource Provider
+PROJECT_NAME := Pulumi azure-app-config Resource Provider
 
-PACK             := xyz
+PACK             := azure-app-config
 PACKDIR          := sdk
-PROJECT          := github.com/pulumi/pulumi-xyz
-NODE_MODULE_NAME := @abc/xyz
-NUGET_PKG_NAME   := Abc.Xyz
+PROJECT          := github.com/Werner-Swart-83/pulumi-azure-app-config-native
+NODE_MODULE_NAME := @personal/azure-app-config
+NUGET_PKG_NAME   := personal.azure-app-config
 
 PROVIDER        := pulumi-resource-${PACK}
 VERSION         ?= $(shell pulumictl get version)

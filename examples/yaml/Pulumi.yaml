@@ -1,17 +1,17 @@
-name: provider-xyz-native
+name: provider-azure-app-config-native
 runtime: yaml
 plugins:
   providers:
-    - name: xyz
+    - name: azure-app-config
       path: ../../bin
 
 resources:
   myRandomResource:
-    type: xyz:Random
+    type: azure-app-config:Random
     properties:
       length: 24
   myRandomComponent:
-    type: xyz:RandomComponent
+    type: azure-app-config:RandomComponent
     properties:
       length: 24
 

@@ -1,4 +1,4 @@
-module github.com/pulumi/pulumi-xyz/provider
+module github.com/Werner-Swart-83/pulumi-azure-app-config-native/provider
 
 go 1.22
 

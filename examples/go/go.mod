@@ -1,4 +1,4 @@
-module provider-xyz-native
+module provider-azure-app-config-native
 
 go 1.20
 
