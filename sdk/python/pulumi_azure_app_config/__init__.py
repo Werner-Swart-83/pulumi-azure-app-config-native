@@ -5,27 +5,29 @@
 from . import _utilities
 import typing
 # Export this package's modules as members:
+from .config_resource import *
 from .provider import *
 from .random import *
 from .random_component import *
 
 # Make subpackages available:
 if typing.TYPE_CHECKING:
-    import pulumi_xyz.config as __config
+    import pulumi_azure_app_config.config as __config
     config = __config
 else:
-    config = _utilities.lazy_import('pulumi_xyz.config')
+    config = _utilities.lazy_import('pulumi_azure_app_config.config')
 
 _utilities.register(
     resource_modules="""
 [
  {
-  "pkg": "xyz",
+  "pkg": "azure-app-config",
   "mod": "index",
-  "fqn": "pulumi_xyz",
+  "fqn": "pulumi_azure_app_config",
   "classes": {
-   "xyz:index:Random": "Random",
-   "xyz:index:RandomComponent": "RandomComponent"
+   "azure-app-config:index:ConfigResource": "ConfigResource",
+   "azure-app-config:index:Random": "Random",
+   "azure-app-config:index:RandomComponent": "RandomComponent"
   }
  }
 ]
@@ -33,9 +35,9 @@ _utilities.register(
     resource_packages="""
 [
  {
-  "pkg": "xyz",
-  "token": "pulumi:providers:xyz",
-  "fqn": "pulumi_xyz",
+  "pkg": "azure-app-config",
+  "token": "pulumi:providers:azure-app-config",
+  "fqn": "pulumi_azure_app_config",
   "class": "Provider"
  }
 ]

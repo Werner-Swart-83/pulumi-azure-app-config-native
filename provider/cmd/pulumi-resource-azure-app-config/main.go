@@ -17,8 +17,8 @@ package main
 import (
 	p "github.com/pulumi/pulumi-go-provider"
 
-	azure-app-config "github.com/Werner-Swart-83/pulumi-azure-app-config-native/provider"
+	azureappconfig "github.com/Werner-Swart-83/pulumi-azure-app-config-native/provider"
 )
 
 // Serve the provider against Pulumi's Provider protocol.
-func main() { p.RunProvider(azure-app-config.Name, azure-app-config.Version, azure-app-config.Provider()) }
+func main() { p.RunProvider(azureappconfig.Name, azureappconfig.Version, azureappconfig.Provider()) }

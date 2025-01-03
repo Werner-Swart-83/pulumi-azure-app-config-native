@@ -15,6 +15,10 @@
 package provider
 
 import (
+	"context"
+
+	"github.com/Azure/azure-sdk-for-go/sdk/appconfig/azappconfig"
+	"github.com/Azure/azure-sdk-for-go/sdk/azidentity"
 	p "github.com/pulumi/pulumi-go-provider"
 	"github.com/pulumi/pulumi-go-provider/infer"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
@@ -31,18 +35,37 @@ func Provider() p.Provider {
 	return infer.Provider(infer.Options{
 		Resources: []infer.InferredResource{
 			infer.Resource[Random, RandomArgs, RandomState](),
+			infer.Resource[ConfigResource, ConfigResourceArgs, ConfigResourceState](),
 		},
 		Components: []infer.InferredComponent{
 			infer.Component[*RandomComponent, RandomComponentArgs, *RandomComponentState](),
 		},
 		Config: infer.Config[Config](),
 		ModuleMap: map[tokens.ModuleName]tokens.ModuleName{
-			"provider": "index",
+			"provider": "index", // required because the folder with everything in is "provider"
 		},
 	})
 }
 
 // Define some provider-level configuration
 type Config struct {
-	Scream *bool `pulumi:"itsasecret,optional"`
+	Scream          *bool `pulumi:"itsasecret,optional"`
+	AppConfigClient *azappconfig.Client
+}
+
+func (c *Config) Configure(ctx context.Context) error {
+
+	cred, err := azidentity.NewEnvironmentCredential(nil)
+	if err != nil {
+		// TODO: handle error
+	}
+
+	if c.AppConfigClient == nil {
+		c.AppConfigClient, err = azappconfig.NewClient("https://myappconfig.azconfig.io", cred, nil)
+
+		if err != nil {
+			// TODO: handle error
+		}
+	}
+	return nil
 }

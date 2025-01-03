@@ -15,6 +15,7 @@
     "files": [
         "config/index.ts",
         "config/vars.ts",
+        "configResource.ts",
         "index.ts",
         "provider.ts",
         "random.ts",

@@ -5,6 +5,11 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 // Export members:
+export { ConfigResourceArgs } from "./configResource";
+export type ConfigResource = import("./configResource").ConfigResource;
+export const ConfigResource: typeof import("./configResource").ConfigResource = null as any;
+utilities.lazyLoad(exports, ["ConfigResource"], () => require("./configResource"));
+
 export { ProviderArgs } from "./provider";
 export type Provider = import("./provider").Provider;
 export const Provider: typeof import("./provider").Provider = null as any;
@@ -32,20 +37,22 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
-            case "xyz:index:Random":
+            case "azure-app-config:index:ConfigResource":
+                return new ConfigResource(name, <any>undefined, { urn })
+            case "azure-app-config:index:Random":
                 return new Random(name, <any>undefined, { urn })
-            case "xyz:index:RandomComponent":
+            case "azure-app-config:index:RandomComponent":
                 return new RandomComponent(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
-pulumi.runtime.registerResourceModule("xyz", "index", _module)
-pulumi.runtime.registerResourcePackage("xyz", {
+pulumi.runtime.registerResourceModule("azure-app-config", "index", _module)
+pulumi.runtime.registerResourcePackage("azure-app-config", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {
-        if (type !== "pulumi:providers:xyz") {
+        if (type !== "pulumi:providers:azure-app-config") {
             throw new Error(`unknown provider type ${type}`);
         }
         return new Provider(name, <any>undefined, { urn });

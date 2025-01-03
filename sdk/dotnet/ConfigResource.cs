@@ -9,30 +9,30 @@ using Pulumi.Serialization;
 
 namespace Pulumi.AzureAppConfig
 {
-    [AzureAppConfigResourceType("azure-app-config:index:Random")]
-    public partial class Random : global::Pulumi.CustomResource
+    [AzureAppConfigResourceType("azure-app-config:index:ConfigResource")]
+    public partial class ConfigResource : global::Pulumi.CustomResource
     {
-        [Output("length")]
-        public Output<int> Length { get; private set; } = null!;
+        [Output("key")]
+        public Output<string> Key { get; private set; } = null!;
 
-        [Output("result")]
-        public Output<string> Result { get; private set; } = null!;
+        [Output("value")]
+        public Output<string> Value { get; private set; } = null!;
 
 
         /// <summary>
-        /// Create a Random resource with the given unique name, arguments, and options.
+        /// Create a ConfigResource resource with the given unique name, arguments, and options.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public Random(string name, RandomArgs args, CustomResourceOptions? options = null)
-            : base("azure-app-config:index:Random", name, args ?? new RandomArgs(), MakeResourceOptions(options, ""))
+        public ConfigResource(string name, ConfigResourceArgs args, CustomResourceOptions? options = null)
+            : base("azure-app-config:index:ConfigResource", name, args ?? new ConfigResourceArgs(), MakeResourceOptions(options, ""))
         {
         }
 
-        private Random(string name, Input<string> id, CustomResourceOptions? options = null)
-            : base("azure-app-config:index:Random", name, null, MakeResourceOptions(options, id))
+        private ConfigResource(string name, Input<string> id, CustomResourceOptions? options = null)
+            : base("azure-app-config:index:ConfigResource", name, null, MakeResourceOptions(options, id))
         {
         }
 
@@ -48,27 +48,30 @@ namespace Pulumi.AzureAppConfig
             return merged;
         }
         /// <summary>
-        /// Get an existing Random resource's state with the given name, ID, and optional extra
+        /// Get an existing ConfigResource resource's state with the given name, ID, and optional extra
         /// properties used to qualify the lookup.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resulting resource.</param>
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public static Random Get(string name, Input<string> id, CustomResourceOptions? options = null)
+        public static ConfigResource Get(string name, Input<string> id, CustomResourceOptions? options = null)
         {
-            return new Random(name, id, options);
+            return new ConfigResource(name, id, options);
         }
     }
 
-    public sealed class RandomArgs : global::Pulumi.ResourceArgs
+    public sealed class ConfigResourceArgs : global::Pulumi.ResourceArgs
     {
-        [Input("length", required: true)]
-        public Input<int> Length { get; set; } = null!;
+        [Input("key", required: true)]
+        public Input<string> Key { get; set; } = null!;
 
-        public RandomArgs()
+        [Input("value", required: true)]
+        public Input<string> Value { get; set; } = null!;
+
+        public ConfigResourceArgs()
         {
         }
-        public static new RandomArgs Empty => new RandomArgs();
+        public static new ConfigResourceArgs Empty => new ConfigResourceArgs();
     }
 }
